@@ -3,14 +3,13 @@ package com.techelevator;
 public class Slot {
 
     private String slotID;
-    private int stock;
+    private int stock = 5;
     private FoodItem foodItem;
 
     //private boolean soldOut;boolean soldOut
 
-    public Slot(String slotID, int stock) {
+    public Slot(String slotID) {
         this.slotID = slotID;
-        this.stock = stock;
     }
 
     public String getSlotID() {
@@ -44,7 +43,7 @@ public class Slot {
     public void dispenseItem() {
         if (isSoldOut()){
             System.out.println("Item chosen is OUT OF STOCK.");
-        }else{
+        } else {
             stock -= 1;
         }
 

@@ -13,7 +13,8 @@ public class VendingMachineCLI {
 
 	public void run() {
 
-			// Add a loop here for your menu
+		double changeToReturn = 37;
+
 
 	}
 
