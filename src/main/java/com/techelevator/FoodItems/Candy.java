@@ -1,4 +1,4 @@
-package com.techelevator;
+package com.techelevator.FoodItems;
 
 public class Candy extends FoodItem{
     public Candy(String name, double price) {

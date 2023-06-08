@@ -1,4 +1,4 @@
-package com.techelevator;
+package com.techelevator.FoodItems;
 
 public abstract class FoodItem {
 
@@ -11,7 +11,5 @@ public abstract class FoodItem {
     }
 
     public abstract void print();
-
-
 
 }

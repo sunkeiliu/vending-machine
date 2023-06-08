@@ -1,4 +1,4 @@
-package com.techelevator;
+package com.techelevator.FoodItems;
 
 public class Gum extends FoodItem{
 

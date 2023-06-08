@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import com.techelevator.FoodItems.FoodItem;
+
 public class Slot {
 
     private String slotID;
@@ -50,10 +52,6 @@ public class Slot {
     }
 
     public boolean isSoldOut() {
-        if (stock == 0) {
-            return true;
-        } else {
-            return false;
-        }
+        return stock == 0;
     }
 }

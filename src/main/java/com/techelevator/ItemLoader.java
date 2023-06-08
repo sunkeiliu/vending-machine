@@ -1,5 +1,10 @@
 package com.techelevator;
 
+import com.techelevator.FoodItems.Candy;
+import com.techelevator.FoodItems.Chips;
+import com.techelevator.FoodItems.Drink;
+import com.techelevator.FoodItems.Gum;
+
 import java.util.Scanner;
 
 public class ItemLoader {
@@ -38,6 +43,7 @@ public class ItemLoader {
             // Create new slot object for a slot to fill with this info
             Slot slotToFill = new Slot(id);
 
+            // Determine which product type the item belongs to, and create the appropriate object
             if (foodType.equals("Chip")){
                 Chips newChip = new Chips(foodName, foodPrice);
                 slotToFill.fillSlot(newChip);

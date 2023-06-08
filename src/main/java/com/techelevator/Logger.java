@@ -19,36 +19,42 @@ public class Logger {
         this.writer = writer;
     }
 
-    // Add log entry for Feed Money and Return Change
-    public void addToLog(String action, double[] transactionData) {
+    // Determine current date/time and convert to String
+    public String getDateString() {
         LocalDateTime rightNow = LocalDateTime.now();
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
         String nowString = rightNow.format(myFormatter);
 
-        double transactionAmount = transactionData[0];
-        double updatedBalance = transactionData[1];
+        return nowString;
+    }
 
-        String entry = String.format("%s %s %d %d", nowString, action, transactionAmount, updatedBalance);
+
+    // Add log entry for Feed Money and Return Change
+    public void addToLog(String action, double[] transactionData) {
+        String nowString = getDateString();
+
+        String transactionAmount = "" + transactionData[0];
+        String updatedBalance = "" + transactionData[1];
+
+        String entry = String.format("%s %s %s %s", nowString, action, transactionAmount, updatedBalance);
         logEntries.add(entry);
     }
 
-    // Add log entry for purchased item
+    // Add log entry for purchased item (Overloaded Method)
     public void addToLog(String productName, String slotId, double[] transactionData) {
-        LocalDateTime rightNow = LocalDateTime.now();
-        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
-        String nowString = rightNow.format(myFormatter);
+        String nowString = getDateString();
 
-        double transactionAmount = transactionData[0];
-        double updatedBalance = transactionData[1];
+        String transactionAmount = "" + transactionData[0];
+        String updatedBalance = "" + transactionData[1];
 
-        String entry = String.format("%s %s %s %d %d", nowString, productName, slotId, transactionAmount, updatedBalance);
+        String entry = String.format("%s %s %s %s %s", nowString, productName, slotId, transactionAmount, updatedBalance);
         logEntries.add(entry);
     }
 
     // Print all logger entries to output file
     public void printLog(){
         File newFile = new File ("Log.txt");
-        boolean append = newFile.exists() ? true : false;
+        boolean append = newFile.exists();
         try (PrintWriter writer =
         new PrintWriter(new FileOutputStream(newFile, append))){
             for (String entry : logEntries){
