@@ -1,5 +1,8 @@
 package com.techelevator;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -43,6 +46,17 @@ public class Logger {
     }
 
     // Print all logger entries to output file
-    public void printLog();
+    public void printLog(){
+        File newFile = new File ("Log.txt");
+        boolean append = newFile.exists() ? true : false;
+        try (PrintWriter writer =
+        new PrintWriter(new FileOutputStream(newFile, append))){
+            for (String entry : logEntries){
+                writer.println(entry);
+            }
+        } catch (IOException e){
+            System.out.println("Exception: " + e.getMessage());
+        }
+    }
 
 }
