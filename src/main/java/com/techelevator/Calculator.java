@@ -2,7 +2,7 @@ package com.techelevator;
 
 public class Calculator {
 
-    private double balance = 0;
+    private static double balance = 0;
 
     public double getBalance() {
         return balance;
@@ -52,7 +52,7 @@ public class Calculator {
     }
 
     public void printStatement() {
-        System.out.println("Current Money Provided: " + balance);
+        System.out.println(String.format("Current money provided: $%.2f", balance));
     }
 
 }

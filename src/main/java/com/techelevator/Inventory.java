@@ -26,4 +26,15 @@ public class Inventory {
             System.out.println(name + ": " + stock);
         }
     }
+
+    public void printProducts() {
+        for (Map.Entry<String, Slot> slotEntry : inventory.entrySet()){
+            String slotId = slotEntry.getKey();
+            Slot slot = slotEntry.getValue();
+            String productName = slot.getFoodItem().getName();
+            if (!slot.isSoldOut()) {
+                System.out.println(slotId + ": " + productName);
+            }
+        }
+    }
 }
