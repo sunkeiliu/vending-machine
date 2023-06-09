@@ -4,45 +4,43 @@ public class Calculator {
 
     private static double balance = 0;
 
-    public double getBalance() {
+    public static double getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
-        this.balance = balance;
+    public static void setBalance(double updatedBalance) {
+        balance = updatedBalance;
     }
 
-    public double[] feedMoney(double moneyInserted) {
+    public static void feedMoney(double moneyInserted) {
         balance += moneyInserted;
-        return new double[] {moneyInserted, balance};
     }
 
-    public double[] purchaseItem(double itemCost) {
+    public static void purchaseItem(double itemCost) {
         balance -= itemCost;
-        return new double[] {itemCost, balance};
     }
 
-    public double[] returnChange() {
+    public static double[] returnChange() {
         double changeToReturn = balance;
         int quartersCounter = 0;
         int dimesCounter = 0;
         int nickelsCounter = 0;
 
-        double quarters = 0.25;
-        double dimes = 0.10;
-        double nickels = 0.05;
+        double quarter = 0.25;
+        double dime = 0.10;
+        double nickel = 0.05;
 
         while (changeToReturn > 0){
             while (changeToReturn >= 0.25){
-                changeToReturn -= quarters;
+                changeToReturn -= quarter;
                 quartersCounter++;
             }
             while (changeToReturn >= 0.10){
-                changeToReturn -= dimes;
+                changeToReturn -= dime;
                 dimesCounter++;
             }
             while (changeToReturn >= 0.05){
-                changeToReturn -= nickels;
+                changeToReturn -= nickel;
                 nickelsCounter++;
             }
         }
@@ -51,7 +49,7 @@ public class Calculator {
         return new double[] {changeToReturn, balance};
     }
 
-    public void printStatement() {
+    public static void printStatement() {
         System.out.println(String.format("Current money provided: $%.2f", balance));
     }
 

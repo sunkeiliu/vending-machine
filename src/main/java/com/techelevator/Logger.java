@@ -12,40 +12,28 @@ import java.util.List;
 
 public class Logger {
 
-    private PrintWriter writer;
     private List<String> logEntries = new ArrayList<>();
-
-    public Logger (PrintWriter writer) {
-        this.writer = writer;
-    }
 
     // Determine current date/time and convert to String
     public String getDateString() {
         LocalDateTime rightNow = LocalDateTime.now();
         DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
-        String nowString = rightNow.format(myFormatter);
+        return rightNow.format(myFormatter);
 
-        return nowString;
     }
 
 
     // Add log entry for Feed Money and Return Change
-    public void addToLog(String action, double[] transactionData) {
+    public void addToLog(String action, double transactionAmount, double updatedBalance) {
         String nowString = getDateString();
-
-        String transactionAmount = "" + transactionData[0];
-        String updatedBalance = "" + transactionData[1];
 
         String entry = String.format("%s %s %s %s", nowString, action, transactionAmount, updatedBalance);
         logEntries.add(entry);
     }
 
     // Add log entry for purchased item (Overloaded Method)
-    public void addToLog(String productName, String slotId, double[] transactionData) {
+    public void addToLog(String productName, String slotId, double transactionAmount, double updatedBalance) {
         String nowString = getDateString();
-
-        String transactionAmount = "" + transactionData[0];
-        String updatedBalance = "" + transactionData[1];
 
         String entry = String.format("%s %s %s %s %s", nowString, productName, slotId, transactionAmount, updatedBalance);
         logEntries.add(entry);
