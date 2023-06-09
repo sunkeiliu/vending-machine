@@ -46,9 +46,9 @@ public class Slot {
         if (isSoldOut()) {
             System.out.println("Item chosen is OUT OF STOCK. \n");
         }
-        // else if {
-        // Add code for insufficient balance (should prevent dispensing item)
-        //}
+        else if (Calculator.getBalance() < foodItem.getPrice()) {
+            System.out.println("INSUFFICIENT FUNDS \n");
+        }
         else {
             Calculator.purchaseItem(foodItem.getPrice());
             String purchaseLog = String.format("Item: %s Cost: $%.2f Remaining Balance: $%.2f", foodItem.getName(), foodItem.getPrice(), Calculator.getBalance());

@@ -26,9 +26,18 @@ public class VendingMachineCLI {
 		// Create a logger
 		Logger logger = new Logger();
 
+		// Create new log.txt file or blank the existing one
+		File outputFile = new File("Log.txt");
+		try (PrintWriter writer = new PrintWriter(outputFile)) {
+
+		} catch (FileNotFoundException e){
+			System.out.println(e.getMessage());
+		}
+
 		// Load inventory from .csv read file
 		File file = new File("vendingmachine.csv");
 
+		// Read the input file and load the inventory
 		try (Scanner readFile = new Scanner(file)){
 			ItemLoader.loadItems(readFile, inventory);
 		} catch (FileNotFoundException e){
@@ -64,7 +73,6 @@ public class VendingMachineCLI {
 			// If user selects "(3) Exit"
 			} else if (userChoiceFirst.equals("3")) {
 				// If user wants to exit vending machine, print the full log
-				logger.printLog();
 				break;
 			}
 
@@ -129,7 +137,7 @@ public class VendingMachineCLI {
 
 				// IF USER SELECTED TO FINISH TRANSACTION
 				} else if (userChoiceSecond.equals("3")) {
-					// Return Change TO BE COMPLETED
+					Calculator.returnChange();
 					break;
 				}
 			}

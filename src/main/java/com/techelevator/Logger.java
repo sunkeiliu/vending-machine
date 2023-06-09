@@ -22,32 +22,31 @@ public class Logger {
 
     }
 
-
-    // Add log entry for Feed Money and Return Change
+    // Add log entry for "Feed Money" and "Finish Transaction"
     public void addToLog(String action, double transactionAmount, double updatedBalance) {
         String nowString = getDateString();
 
         String entry = String.format("%s %s $%.2f $%.2f", nowString, action, transactionAmount, updatedBalance);
         logEntries.add(entry);
+        printLog(entry);
     }
 
-    // Add log entry for purchased item (Overloaded Method)
+    // Add log entry for "Select Product" (Overloaded Method)
     public void addToLog(String productName, String slotId, double transactionAmount, double updatedBalance) {
         String nowString = getDateString();
 
         String entry = String.format("%s %s %s $%.2f $%.2f", nowString, productName, slotId, transactionAmount, updatedBalance);
         logEntries.add(entry);
+        printLog(entry);
     }
 
     // Print all logger entries to output file
-    public void printLog(){
+    public void printLog(String entry){
         File newFile = new File ("Log.txt");
-//        boolean append = newFile.exists();
+        boolean append = newFile.exists();
         try (PrintWriter writer =
-        new PrintWriter(new FileOutputStream(newFile, false))){
-            for (String entry : logEntries){
-                writer.println(entry);
-            }
+        new PrintWriter(new FileOutputStream(newFile, append))){
+            writer.println(entry);
         } catch (IOException e){
             System.out.println("Exception: " + e.getMessage());
         }

@@ -30,7 +30,7 @@ public class Calculator {
         double dime = 0.10;
         double nickel = 0.05;
 
-        while (changeToReturn > 0){
+        while (changeToReturn > nickel){
             while (changeToReturn >= 0.25){
                 changeToReturn -= quarter;
                 quartersCounter++;
@@ -44,7 +44,7 @@ public class Calculator {
                 nickelsCounter++;
             }
         }
-        System.out.println("Change returned: " + quartersCounter + " quarters," + dimesCounter + " dimes," + nickelsCounter + " nickels.");
+        System.out.println("Change returned: " + quartersCounter + " quarter(s), " + dimesCounter + " dime(s), " + nickelsCounter + " nickel(s). \n");
         balance = 0;
     }
 
