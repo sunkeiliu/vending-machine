@@ -9,7 +9,7 @@ import java.util.Scanner;
 
 public class ItemLoader {
 
-    public static void loadItems(Scanner readFile) {
+    public static void loadItems(Scanner readFile, Inventory inventory) {
 
         /*
         Each cycle of the "while" loop creates one slotItem array
@@ -25,8 +25,6 @@ public class ItemLoader {
         Once we have finished creating a new Slot and a new FoodItem, add the new Slot to the overall Inventory
         */
 
-        // Create a new inventory
-        Inventory inventory = new Inventory();
 
         // Loop through text file - create array for each line (split by pipe)
         while (readFile.hasNextLine()) {

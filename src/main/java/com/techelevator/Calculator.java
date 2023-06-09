@@ -24,13 +24,29 @@ public class Calculator {
 
     public double[] returnChange() {
         double changeToReturn = balance;
-        int quarters = 0;
-        int dimes = 0;
-        int nickels = 0;
+        int quartersCounter = 0;
+        int dimesCounter = 0;
+        int nickelsCounter = 0;
 
-        // Write code to determine how many quarters, dimes and nickels are necessary
-        // Should minimize total number of coins required.
+        double quarters = 0.25;
+        double dimes = 0.10;
+        double nickels = 0.05;
 
+        while (changeToReturn > 0){
+            while (changeToReturn >= 0.25){
+                changeToReturn -= quarters;
+                quartersCounter++;
+            }
+            while (changeToReturn >= 0.10){
+                changeToReturn -= dimes;
+                dimesCounter++;
+            }
+            while (changeToReturn >= 0.05){
+                changeToReturn -= nickels;
+                nickelsCounter++;
+            }
+        }
+        System.out.println("Change returned: " + quartersCounter + " quarters," + dimesCounter + " dimes," + nickelsCounter + " nickels.");
         balance = 0;
         return new double[] {changeToReturn, balance};
     }
