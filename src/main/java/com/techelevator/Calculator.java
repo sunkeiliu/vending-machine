@@ -20,7 +20,7 @@ public class Calculator {
         balance -= itemCost;
     }
 
-    public static double[] returnChange() {
+    public static void returnChange() {
         double changeToReturn = balance;
         int quartersCounter = 0;
         int dimesCounter = 0;
@@ -46,7 +46,6 @@ public class Calculator {
         }
         System.out.println("Change returned: " + quartersCounter + " quarters," + dimesCounter + " dimes," + nickelsCounter + " nickels.");
         balance = 0;
-        return new double[] {changeToReturn, balance};
     }
 
     public static void printStatement() {

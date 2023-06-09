@@ -7,6 +7,6 @@ public class Candy extends FoodItem{
 
     @Override
     public void print() {
-        System.out.println("Munch Munch, Yum!");
+        System.out.println("Munch Munch, Yum! \n");
     }
 }

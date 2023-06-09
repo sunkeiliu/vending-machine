@@ -17,7 +17,7 @@ public class Logger {
     // Determine current date/time and convert to String
     public String getDateString() {
         LocalDateTime rightNow = LocalDateTime.now();
-        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");
+        DateTimeFormatter myFormatter = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm:ss");
         return rightNow.format(myFormatter);
 
     }
@@ -42,9 +42,9 @@ public class Logger {
     // Print all logger entries to output file
     public void printLog(){
         File newFile = new File ("Log.txt");
-        boolean append = newFile.exists();
+//        boolean append = newFile.exists();
         try (PrintWriter writer =
-        new PrintWriter(new FileOutputStream(newFile, append))){
+        new PrintWriter(new FileOutputStream(newFile, false))){
             for (String entry : logEntries){
                 writer.println(entry);
             }

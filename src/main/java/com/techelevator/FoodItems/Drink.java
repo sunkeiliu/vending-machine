@@ -8,6 +8,6 @@ public class Drink extends FoodItem{
 
     @Override
     public void print() {
-        System.out.println("Glug Glug, Yum!");
+        System.out.println("Glug Glug, Yum! \n");
     }
 }

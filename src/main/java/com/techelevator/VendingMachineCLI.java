@@ -2,6 +2,8 @@ package com.techelevator;
 
 import com.techelevator.Exceptions.CurrencyInputException;
 import com.techelevator.Exceptions.MenuInputException;
+import com.techelevator.Exceptions.SlotInputException;
+import com.techelevator.FoodItems.FoodItem;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -33,6 +35,7 @@ public class VendingMachineCLI {
 			System.out.println(e.getMessage());
 		}
 
+		// FIRST MENU SELECTION
 		while (true) {
 			// Display first menu options
 			System.out.println("(1) Display Vending Machine Items");
@@ -46,22 +49,26 @@ public class VendingMachineCLI {
 			try {
 				userChoiceFirst = userInput.nextLine();
 				validateMenuInput(userChoiceFirst);
+				System.out.print("\n");
 			} catch (MenuInputException e) {
 				System.out.println(e.getMessage());
 				continue;
 			}
 
-			// Check menu selection
+			// If user selects "(1) Display Vending Machine Items"
 			if (userChoiceFirst.equals("1")) {
 				inventory.printInventory();
-				System.out.println("\n");
+				System.out.print("\n");
+				continue;
+
+			// If user selects "(3) Exit"
 			} else if (userChoiceFirst.equals("3")) {
 				// If user wants to exit vending machine, print the full log
 				logger.printLog();
 				break;
 			}
 
-
+			// SECOND MENU SELECTION - IF USER SELECTS "(2) PURCHASE"
 			while (true) {
 				// Display second menu options
 				System.out.println("(1) Feed Money");
@@ -75,15 +82,13 @@ public class VendingMachineCLI {
 				try {
 					userChoiceSecond = userInput.nextLine();
 					validateMenuInput(userChoiceSecond);
+					System.out.print("\n");
 				} catch (MenuInputException e) {
 					System.out.println(e.getMessage());
 					continue;
 				}
 
-				// Create a printWriter that we can use for the logger
-
-
-				// Check menu selection
+				// IF USER SELECTED TO LOAD MONEY
 				if (userChoiceSecond.equals("1")) {
 					System.out.print("Amount to load: ");
 
@@ -94,31 +99,37 @@ public class VendingMachineCLI {
 						double moneyToLoad = Double.parseDouble(userChoiceThird);
 						Calculator.feedMoney(moneyToLoad);
 						Calculator.printStatement();
-						logger.addToLog("FEED MONEY: ", moneyToLoad, Calculator.getBalance());
+						System.out.print("\n");
+						logger.addToLog("FEED MONEY:", moneyToLoad, Calculator.getBalance());
 
 					} catch (CurrencyInputException e){
-						System.out.println(e.getMessage());
-						continue;
+						System.out.println(e.getMessage() + "\n");
 					}
 
+				// IF USER SELECTED TO PURCHASE ITEM
 				} else if (userChoiceSecond.equals("2")) {
 					inventory.printProducts();
-					System.out.println("\n");
+					System.out.print("\n");
 
 					// Ask user for slot ID
 					System.out.print("Select Product: ");
-					String slotId = userInput.nextLine();
-					Slot slotChosen = inventory.getInventory().get(slotId);
+					try {
+						String slotId = userInput.nextLine();
+						validateSlotInput(slotId, inventory);
 
-					if (!inventory.getInventory().containsKey(slotId)){
-						// add throw exception for invalid slotID
+						Slot slotChosen = inventory.getInventory().get(slotId);
+						slotChosen.dispenseItem();
 
+						FoodItem foodSelected = slotChosen.getFoodItem();
+						logger.addToLog(foodSelected.getName(), slotId,foodSelected.getPrice(), Calculator.getBalance());
+
+					} catch (SlotInputException e) {
+						System.out.println(e.getMessage());
 					}
-					slotChosen.dispenseItem();
 
-
-
+				// IF USER SELECTED TO FINISH TRANSACTION
 				} else if (userChoiceSecond.equals("3")) {
+					// Return Change TO BE COMPLETED
 					break;
 				}
 			}
@@ -141,9 +152,15 @@ public class VendingMachineCLI {
 
 	// Let's create another method for validateCurrencyInput that checks that the user is feeding a real bill amount (0.05, 0.10, 0.25, 1.00, 5.00)
 	// Throw a custom currencyException is any other input is provided
-	public void validateCurrencyInput(String input) throws CurrencyInputException{
+	public void validateCurrencyInput(String input) throws CurrencyInputException {
 		if (!(input.equals(".25") || input.equals("1") || input.equals("5"))){
 			throw new CurrencyInputException();
+		}
+	}
+
+	public void validateSlotInput(String input, Inventory inventory) throws SlotInputException {
+		if (!inventory.getInventory().containsKey(input)) {
+			throw new SlotInputException();
 		}
 	}
 

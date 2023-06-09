@@ -8,7 +8,7 @@ public class Gum extends FoodItem{
 
     @Override
     public void print() {
-        System.out.println("Chew Chew, Yum!");
+        System.out.println("Chew Chew, Yum! \n");
 
     }
 }

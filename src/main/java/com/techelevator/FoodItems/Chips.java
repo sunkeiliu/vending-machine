@@ -8,6 +8,6 @@ public class Chips extends FoodItem{
 
     @Override
     public void print() {
-        System.out.println("Crunch Crunch, Yum!");
+        System.out.println("Crunch Crunch, Yum! \n");
     }
 }
