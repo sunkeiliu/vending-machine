@@ -1,5 +1,6 @@
 package com.techelevator;
 
+import com.techelevator.Exceptions.CurrencyInputException;
 import com.techelevator.Exceptions.MenuInputException;
 
 import java.io.File;
@@ -37,6 +38,7 @@ public class VendingMachineCLI {
 			System.out.println("(1) Display Vending Machine Items");
 			System.out.println("(2) Purchase");
 			System.out.println("(3) Exit");
+			System.out.print("Select Option: ");
 
 			String userChoiceFirst = "";
 
@@ -65,6 +67,7 @@ public class VendingMachineCLI {
 				System.out.println("(1) Feed Money");
 				System.out.println("(2) Select Product");
 				System.out.println("(3) Finish Transaction");
+				System.out.print("Select Option: ");
 
 				String userChoiceSecond = "";
 
@@ -83,10 +86,20 @@ public class VendingMachineCLI {
 				// Check menu selection
 				if (userChoiceSecond.equals("1")) {
 					System.out.print("Amount to load: ");
-					double moneyToLoad = Double.parseDouble(userInput.nextLine());
-					Calculator.feedMoney(moneyToLoad);
-					Calculator.printStatement();
-					logger.addToLog("FEED MONEY: ", moneyToLoad, Calculator.getBalance());
+
+					// Prompt user for currency amount to load
+					try {
+						String userChoiceThird= userInput.nextLine();
+						validateCurrencyInput(userChoiceThird);
+						double moneyToLoad = Double.parseDouble(userChoiceThird);
+						Calculator.feedMoney(moneyToLoad);
+						Calculator.printStatement();
+						logger.addToLog("FEED MONEY: ", moneyToLoad, Calculator.getBalance());
+
+					} catch (CurrencyInputException e){
+						System.out.println(e.getMessage());
+						continue;
+					}
 
 				} else if (userChoiceSecond.equals("2")) {
 					inventory.printProducts();
@@ -96,6 +109,17 @@ public class VendingMachineCLI {
 					System.out.print("Select Product: ");
 					String slotId = userInput.nextLine();
 					Slot slotChosen = inventory.getInventory().get(slotId);
+
+					if (!inventory.getInventory().containsKey(slotId)){
+						// add throw exception for invalid slotID
+
+					}
+					slotChosen.dispenseItem();
+
+
+
+				} else if (userChoiceSecond.equals("3")) {
+					break;
 				}
 			}
 
@@ -117,6 +141,13 @@ public class VendingMachineCLI {
 
 	// Let's create another method for validateCurrencyInput that checks that the user is feeding a real bill amount (0.05, 0.10, 0.25, 1.00, 5.00)
 	// Throw a custom currencyException is any other input is provided
+	public void validateCurrencyInput(String input) throws CurrencyInputException{
+		if (!(input.equals(".25") || input.equals("1") || input.equals("5"))){
+			throw new CurrencyInputException();
+		}
+	}
+
+
 
 
 }

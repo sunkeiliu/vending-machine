@@ -27,7 +27,7 @@ public class Logger {
     public void addToLog(String action, double transactionAmount, double updatedBalance) {
         String nowString = getDateString();
 
-        String entry = String.format("%s %s %s %s", nowString, action, transactionAmount, updatedBalance);
+        String entry = String.format("%s %s $%.2f $%.2f", nowString, action, transactionAmount, updatedBalance);
         logEntries.add(entry);
     }
 
@@ -35,7 +35,7 @@ public class Logger {
     public void addToLog(String productName, String slotId, double transactionAmount, double updatedBalance) {
         String nowString = getDateString();
 
-        String entry = String.format("%s %s %s %s %s", nowString, productName, slotId, transactionAmount, updatedBalance);
+        String entry = String.format("%s %s %s $%.2f $%.2f", nowString, productName, slotId, transactionAmount, updatedBalance);
         logEntries.add(entry);
     }
 
