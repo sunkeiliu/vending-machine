@@ -8,6 +8,8 @@ public class Slot {
     private int stock = 5;
     private FoodItem foodItem;
 
+    private int amountSold;
+
     //private boolean soldOut;boolean soldOut
 
     public Slot(String slotID) {
@@ -42,7 +44,16 @@ public class Slot {
         this.foodItem = foodItem;
     }
 
+    public int getAmountSold() {
+        return amountSold;
+    }
+
+    public void setAmountSold(int amountSold) {
+        this.amountSold = amountSold;
+    }
+
     public void dispenseItem() {
+
         if (isSoldOut()) {
             System.out.println("Item chosen is OUT OF STOCK. \n");
         }
@@ -55,6 +66,7 @@ public class Slot {
             System.out.println(purchaseLog);
             foodItem.print();
             stock -= 1;
+            amountSold++;
         }
 
     }

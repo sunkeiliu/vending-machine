@@ -3,9 +3,17 @@ package com.techelevator;
 public class Calculator {
 
     private static double balance = 0;
-
+    public static double totalAmount = 0;
     public static double getBalance() {
         return balance;
+    }
+
+    public static double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public static void setTotalAmount(double itemCost) {
+        return itemCost;
     }
 
     public static void setBalance(double updatedBalance) {

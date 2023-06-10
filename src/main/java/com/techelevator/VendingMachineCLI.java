@@ -26,6 +26,9 @@ public class VendingMachineCLI {
 		// Create a logger
 		Logger logger = new Logger();
 
+		// Create Sales Report
+		SalesReport salesReport = new SalesReport();
+
 		// Create new log.txt file or blank the existing one
 		File outputFile = new File("Log.txt");
 		try (PrintWriter writer = new PrintWriter(outputFile)) {
@@ -33,6 +36,14 @@ public class VendingMachineCLI {
 		} catch (FileNotFoundException e){
 			System.out.println(e.getMessage());
 		}
+
+		// Create new SalesReport.txt file
+		File salesReportFile = new File ("SalesReport.txt");
+//		try (Printwriter writer2 = new PrintWriter(salesReportFile)){
+//
+//		} catch (FileNotFoundException e){
+//			System.out.println(e.getMessage());
+//		}
 
 		// Load inventory from .csv read file
 		File file = new File("vendingmachine.csv");
@@ -57,7 +68,7 @@ public class VendingMachineCLI {
 			// User selects first menu option
 			try {
 				userChoiceFirst = userInput.nextLine();
-				validateMenuInput(userChoiceFirst);
+				validateMenu1Input(userChoiceFirst);
 				System.out.print("\n");
 			} catch (MenuInputException e) {
 				System.out.println(e.getMessage());
@@ -89,7 +100,7 @@ public class VendingMachineCLI {
 				// User selects second menu option
 				try {
 					userChoiceSecond = userInput.nextLine();
-					validateMenuInput(userChoiceSecond);
+					validateMenu2Input(userChoiceSecond);
 					System.out.print("\n");
 				} catch (MenuInputException e) {
 					System.out.println(e.getMessage());
@@ -152,7 +163,13 @@ public class VendingMachineCLI {
 
 	// Let's create a method for validateMenuInput that simply checks if the user correctly inputs 1, 2, or 3
 	// Throw a custom inputException if any other input is provided
-	public void validateMenuInput(String input) throws MenuInputException {
+	public void validateMenu1Input(String input) throws MenuInputException {
+		if (!(input.equals("1") || input.equals("2") || input.equals("3") || input.equals("4"))) {
+			throw new MenuInputException();
+		}
+	}
+
+	public void validateMenu2Input(String input) throws MenuInputException {
 		if (!(input.equals("1") || input.equals("2") || input.equals("3"))) {
 			throw new MenuInputException();
 		}
