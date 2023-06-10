@@ -4,6 +4,7 @@ public class Calculator {
 
     private static double balance = 0;
     public static double totalAmount = 0;
+
     public static double getBalance() {
         return balance;
     }
@@ -12,8 +13,8 @@ public class Calculator {
         return totalAmount;
     }
 
-    public static void setTotalAmount(double itemCost) {
-        return itemCost;
+    public static void setTotalAmount(double newAmount) {
+        totalAmount = newAmount;
     }
 
     public static void setBalance(double updatedBalance) {
@@ -25,6 +26,7 @@ public class Calculator {
     }
 
     public static void purchaseItem(double itemCost) {
+        totalAmount += itemCost;
         balance -= itemCost;
     }
 

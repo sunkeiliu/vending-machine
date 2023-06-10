@@ -37,14 +37,6 @@ public class VendingMachineCLI {
 			System.out.println(e.getMessage());
 		}
 
-		// Create new SalesReport.txt file
-		File salesReportFile = new File ("SalesReport.txt");
-//		try (Printwriter writer2 = new PrintWriter(salesReportFile)){
-//
-//		} catch (FileNotFoundException e){
-//			System.out.println(e.getMessage());
-//		}
-
 		// Load inventory from .csv read file
 		File file = new File("vendingmachine.csv");
 
@@ -54,6 +46,9 @@ public class VendingMachineCLI {
 		} catch (FileNotFoundException e){
 			System.out.println(e.getMessage());
 		}
+
+		// Create new SalesReport.txt file
+		salesReport.initializeSalesReport(inventory);
 
 		// FIRST MENU SELECTION
 		while (true) {
@@ -85,6 +80,12 @@ public class VendingMachineCLI {
 			} else if (userChoiceFirst.equals("3")) {
 				// If user wants to exit vending machine, print the full log
 				break;
+			}
+
+			// If user selects "(4) Generate Sales Report" (HIDDEN OPTION)
+			else if (userChoiceFirst.equals("4")) {
+				salesReport.printSalesLog(inventory);
+				continue;
 			}
 
 			// SECOND MENU SELECTION - IF USER SELECTS "(2) PURCHASE"
@@ -140,7 +141,12 @@ public class VendingMachineCLI {
 						slotChosen.dispenseItem();
 
 						FoodItem foodSelected = slotChosen.getFoodItem();
+
+						// Add a line to logger for purchase info
 						logger.addToLog(foodSelected.getName(), slotId,foodSelected.getPrice(), Calculator.getBalance());
+
+						// Update sales report with purchase of item (add 1 to items purchase)
+						salesReport.addToSalesReport(foodSelected.getName());
 
 					} catch (SlotInputException e) {
 						System.out.println(e.getMessage());
@@ -150,6 +156,7 @@ public class VendingMachineCLI {
 				} else if (userChoiceSecond.equals("3")) {
 					Calculator.returnChange();
 					break;
+
 				}
 			}
 
