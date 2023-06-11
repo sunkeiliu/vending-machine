@@ -34,7 +34,7 @@ public class CalculatorTests {
     }
 
     @Test
-    public void purchaseItemTesTotalAmount() {
+    public void purchaseItemTestTotalAmount() {
         // Arrange
         Calculator.setTotalAmount(5.00);
         double expectedBalance = 6.50;
