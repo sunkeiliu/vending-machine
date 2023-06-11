@@ -26,7 +26,7 @@ public class VendingMachineCLI {
 		// Create a logger
 		Logger logger = new Logger();
 
-		// Create Sales Report
+		// Create Sales Report Object
 		SalesReport salesReport = new SalesReport();
 
 		// Create new log.txt file or blank the existing one
@@ -138,15 +138,16 @@ public class VendingMachineCLI {
 						validateSlotInput(slotId, inventory);
 
 						Slot slotChosen = inventory.getInventory().get(slotId);
-						slotChosen.dispenseItem();
+						boolean wasDispensed = slotChosen.dispenseItem();
 
 						FoodItem foodSelected = slotChosen.getFoodItem();
+						if (wasDispensed) {
+							// Add a line to logger for purchase info
+							logger.addToLog(foodSelected.getName(), slotId, foodSelected.getPrice(), Calculator.getBalance());
 
-						// Add a line to logger for purchase info
-						logger.addToLog(foodSelected.getName(), slotId,foodSelected.getPrice(), Calculator.getBalance());
-
-						// Update sales report with purchase of item (add 1 to items purchase)
-						salesReport.addToSalesReport(foodSelected.getName());
+							// Update sales report with purchase of item (add 1 to items purchase)
+							salesReport.addToSalesReport(foodSelected.getName());
+						}
 
 					} catch (SlotInputException e) {
 						System.out.println(e.getMessage());
@@ -154,7 +155,7 @@ public class VendingMachineCLI {
 
 				// IF USER SELECTED TO FINISH TRANSACTION
 				} else if (userChoiceSecond.equals("3")) {
-					Calculator.returnChange();
+					System.out.println(Calculator.returnChange());
 					break;
 
 				}

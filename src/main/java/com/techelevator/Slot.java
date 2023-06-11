@@ -52,21 +52,26 @@ public class Slot {
         this.amountSold = amountSold;
     }
 
-    public void dispenseItem() {
+    public boolean dispenseItem() {
 
         if (isSoldOut()) {
             System.out.println("Item chosen is OUT OF STOCK. \n");
+            return false;
         }
         else if (Calculator.getBalance() < foodItem.getPrice()) {
             System.out.println("INSUFFICIENT FUNDS \n");
+            return false;
         }
         else {
             Calculator.purchaseItem(foodItem.getPrice());
-            String purchaseLog = String.format("Item: %s Cost: $%.2f Remaining Balance: $%.2f", foodItem.getName(), foodItem.getPrice(), Calculator.getBalance());
-            System.out.println(purchaseLog);
-            foodItem.print();
             stock -= 1;
             amountSold++;
+
+            String purchaseLog = String.format("Item: %s Cost: $%.2f Remaining Balance: $%.2f", foodItem.getName(), foodItem.getPrice(), Calculator.getBalance());
+            String fullResponse = purchaseLog + "\n" + foodItem.print();
+
+            System.out.println(fullResponse);
+            return true;
         }
 
     }

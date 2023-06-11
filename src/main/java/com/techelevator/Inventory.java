@@ -32,9 +32,7 @@ public class Inventory {
             String slotId = slotEntry.getKey();
             Slot slot = slotEntry.getValue();
             String productName = slot.getFoodItem().getName();
-            if (!slot.isSoldOut()) {
-                System.out.println(slotId + ": " + productName);
-            }
+            System.out.println(slotId + ": " + productName);
         }
     }
 }

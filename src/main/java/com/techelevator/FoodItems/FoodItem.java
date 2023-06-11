@@ -26,6 +26,6 @@ public abstract class FoodItem {
         this.price = price;
     }
 
-    public abstract void print();
+    public abstract String print();
 
 }

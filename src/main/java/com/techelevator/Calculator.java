@@ -1,5 +1,7 @@
 package com.techelevator;
 
+import java.math.BigDecimal;
+
 public class Calculator {
 
     private static double balance = 0;
@@ -30,32 +32,36 @@ public class Calculator {
         balance -= itemCost;
     }
 
-    public static void returnChange() {
-        double changeToReturn = balance;
+    public static String returnChange() {
+        BigDecimal changeToReturn = BigDecimal.valueOf(balance);
+
         int quartersCounter = 0;
         int dimesCounter = 0;
         int nickelsCounter = 0;
 
-        double quarter = 0.25;
-        double dime = 0.10;
-        double nickel = 0.05;
+        BigDecimal quarter = BigDecimal.valueOf(.25);
+        BigDecimal dime = BigDecimal.valueOf(.10);
+        BigDecimal nickel = BigDecimal.valueOf(.05);
+        BigDecimal nearZero = BigDecimal.valueOf(0.001);
 
-        while (changeToReturn > nickel){
-            while (changeToReturn >= 0.25){
-                changeToReturn -= quarter;
+        while (changeToReturn.compareTo(nearZero) == 1) {
+
+            while (changeToReturn.compareTo(quarter) == 1 || changeToReturn.compareTo(quarter) == 0) {
+                changeToReturn = changeToReturn.subtract(quarter);
                 quartersCounter++;
             }
-            while (changeToReturn >= 0.10){
-                changeToReturn -= dime;
+            while (changeToReturn.compareTo(dime) == 1 || changeToReturn.compareTo(dime) == 0) {
+                changeToReturn = changeToReturn.subtract(dime);
                 dimesCounter++;
             }
-            while (changeToReturn >= 0.05){
-                changeToReturn -= nickel;
+            while (changeToReturn.compareTo(nickel) == 1 || changeToReturn.compareTo(nickel) == 0) {
+                changeToReturn = changeToReturn.subtract(nickel);
                 nickelsCounter++;
             }
         }
-        System.out.println("Change returned: " + quartersCounter + " quarter(s), " + dimesCounter + " dime(s), " + nickelsCounter + " nickel(s). \n");
-        balance = 0;
+        setBalance(0);
+        String response = "Change returned: " + quartersCounter + " quarter(s), " + dimesCounter + " dime(s), " + nickelsCounter + " nickel(s). \n";
+        return response;
     }
 
     public static void printStatement() {
