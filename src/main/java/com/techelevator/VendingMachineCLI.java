@@ -4,6 +4,7 @@ import com.techelevator.Exceptions.CurrencyInputException;
 import com.techelevator.Exceptions.MenuInputException;
 import com.techelevator.Exceptions.SlotInputException;
 import com.techelevator.FoodItems.FoodItem;
+import com.techelevator.util.ConsoleUtility;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -66,7 +67,7 @@ public class VendingMachineCLI {
 				validateMenu1Input(userChoiceFirst);
 				System.out.print("\n");
 			} catch (MenuInputException e) {
-				System.out.println(e.getMessage());
+				ConsoleUtility.printError(e.getMessage());
 				continue;
 			}
 
