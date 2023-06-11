@@ -105,7 +105,7 @@ public class VendingMachineCLI {
 					validateMenu2Input(userChoiceSecond);
 					System.out.print("\n");
 				} catch (MenuInputException e) {
-					System.out.println(e.getMessage());
+					ConsoleUtility.printError(e.getMessage());
 					continue;
 				}
 
@@ -124,7 +124,7 @@ public class VendingMachineCLI {
 						logger.addToLog("FEED MONEY:", moneyToLoad, Calculator.getBalance());
 
 					} catch (CurrencyInputException e){
-						System.out.println(e.getMessage() + "\n");
+						ConsoleUtility.printError((e.getMessage() + "\n"));
 					}
 
 				// IF USER SELECTED TO PURCHASE ITEM
@@ -151,7 +151,7 @@ public class VendingMachineCLI {
 						}
 
 					} catch (SlotInputException e) {
-						System.out.println(e.getMessage());
+						ConsoleUtility.printError(e.getMessage());
 					}
 
 				// IF USER SELECTED TO FINISH TRANSACTION
