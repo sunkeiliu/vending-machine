@@ -42,19 +42,21 @@ public class Calculator {
         BigDecimal quarter = BigDecimal.valueOf(.25);
         BigDecimal dime = BigDecimal.valueOf(.10);
         BigDecimal nickel = BigDecimal.valueOf(.05);
+
         BigDecimal nearZero = BigDecimal.valueOf(0.001);
+        BigDecimal delta = BigDecimal.valueOf(.01);
 
         while (changeToReturn.compareTo(nearZero) == 1) {
 
-            while (changeToReturn.compareTo(quarter) == 1 || changeToReturn.compareTo(quarter) == 0) {
+            while (changeToReturn.compareTo(quarter.subtract(delta)) == 1 || changeToReturn.compareTo(quarter) == 0) {
                 changeToReturn = changeToReturn.subtract(quarter);
                 quartersCounter++;
             }
-            while (changeToReturn.compareTo(dime) == 1 || changeToReturn.compareTo(dime) == 0) {
+            while (changeToReturn.compareTo(dime.subtract(delta)) == 1 || changeToReturn.compareTo(dime) == 0) {
                 changeToReturn = changeToReturn.subtract(dime);
                 dimesCounter++;
             }
-            while (changeToReturn.compareTo(nickel) == 1 || changeToReturn.compareTo(nickel) == 0) {
+            while (changeToReturn.compareTo(nickel.subtract(delta)) == 1 || changeToReturn.compareTo(nickel) == 0) {
                 changeToReturn = changeToReturn.subtract(nickel);
                 nickelsCounter++;
             }

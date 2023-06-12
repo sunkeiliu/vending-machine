@@ -156,7 +156,15 @@ public class VendingMachineCLI {
 
 				// IF USER SELECTED TO FINISH TRANSACTION
 				} else if (userChoiceSecond.equals("3")) {
+
+					// Before returning change, store current balance in variable
+					double changeToReturn = Calculator.getBalance();
+
+					// Return change and print to console
 					System.out.println(Calculator.returnChange());
+
+					// Add to logger, using previously stored variable to represent the change that was returned
+					logger.addToLog("GIVE CHANGE:", changeToReturn, Calculator.getBalance());
 					break;
 
 				}

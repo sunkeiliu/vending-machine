@@ -1,6 +1,7 @@
 package com.techelevator;
 
 import com.techelevator.FoodItems.FoodItem;
+import com.techelevator.util.ConsoleUtility;
 
 public class Slot {
 
@@ -55,11 +56,11 @@ public class Slot {
     public boolean dispenseItem() {
 
         if (isSoldOut()) {
-            System.out.println("Item chosen is OUT OF STOCK. \n");
+            ConsoleUtility.printError("Item chosen is OUT OF STOCK. \n");
             return false;
         }
         else if (Calculator.getBalance() < foodItem.getPrice()) {
-            System.out.println("INSUFFICIENT FUNDS \n");
+            ConsoleUtility.printError("INSUFFICIENT FUNDS \n");
             return false;
         }
         else {
